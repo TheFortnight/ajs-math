@@ -4,17 +4,21 @@ export default class Maths {
     this.stoned = false;
   }
 
-  getAttack(distance) {
+  setAttack(distance) {
     let dist = distance;
     if (dist > 5) {
       dist = 5;
     }
 
     let stonedEffect = 0;
-    if (this.stoned && dist !== 0) stonedEffect = Math.round(Math.log2(dist) * 5);
-    if (dist === 1) return this.attack - stonedEffect;
+    if (this.stoned) stonedEffect = Math.round(Math.log2(dist) * 5);
+    if (dist === 1) this._attack = this.attack - stonedEffect;
 
-    return this.attack - (this.attack / 10) * (dist - 1) - stonedEffect;
+    this._attack = this.attack - (this.attack / 10) * (dist - 1) - stonedEffect;
+  }
+
+  getAttack(){
+    return this._attack;
   }
 
   setStoned(bool) {
