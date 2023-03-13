@@ -9,20 +9,24 @@ export default class Maths {
     if (dist > 5) {
       dist = 5;
     }
-
+    const isStoned = this.getStoned();
     let stonedEffect = 0;
-    if (this.stoned) stonedEffect = Math.round(Math.log2(dist) * 5);
+    if (isStoned) stonedEffect = Math.round(Math.log2(dist) * 5);
     if (dist === 1) this._attack = this.attack - stonedEffect;
 
     this._attack = this.attack - (this.attack / 10) * (dist - 1) - stonedEffect;
   }
 
-  getAttack(){
+  getAttack() {
     return this._attack;
   }
 
   setStoned(bool) {
     this.stoned = bool;
+  }
+
+  getStoned() {
+    return this.stoned;
   }
 }
 
